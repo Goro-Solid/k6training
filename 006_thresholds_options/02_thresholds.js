@@ -1,7 +1,7 @@
 import http from 'k6/http';
-import {check} from 'k6';
+import { check } from 'k6';
 
-const URL = "https://appxx.azurewebsites.net/"
+const URL = "http://localhost:5001"
 
 export let options = { //options allow to configure your test rum
     vus: 1,
@@ -15,7 +15,7 @@ export let options = { //options allow to configure your test rum
 
 export default function () {
     let res = http.request('GET', URL);
-    check(res,{
+    check(res, {
         'status is 200': (r) => r.status === 200
     })
 }
