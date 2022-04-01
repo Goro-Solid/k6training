@@ -1,5 +1,5 @@
 import http from 'k6/http';
-import {check} from 'k6';
+import { check } from 'k6';
 
 const URL = "https://appxx.azurewebsites.net/"
 
@@ -9,7 +9,9 @@ export default function () {
     let checkResult = check(res, {
         'response code was 200': (res) => res.status == 200,
         'remote port was 443': (res) => res.remote_port === 443,
-        'dummy check' : ()=> 'a' === 'a'
+        'dummy check': () => 'a' === 'a',
+        'foo': true,
+        'x': 9
     });
     console.log("Check Result " + checkResult)
 }

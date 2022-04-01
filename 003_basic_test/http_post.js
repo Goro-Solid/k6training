@@ -1,21 +1,20 @@
 import http from 'k6/http';
+import { check, group, sleep } from 'k6';
 
-//test with all params set
 export default function () {
-    var url = 'https://appxx.azurewebsites.net/post/add/newpost';
-    var payload = JSON.stringify(
-        {
-               "body": "k6",
-               "title": "Post from k6"
-              }
-        )
-    ;
-    var params = {
+    let url = "https://appxx.azurewebsites.net/post/add/newpost"
+    let payload = {
+        body: "Something",
+        title: "Title"
+    }
+    let params = {
         headers: {
-            'Content-Type': 'application/json',
-        },
-    };
-
-    http.post(url, payload, params);
-
-}
+            'Content-Type': 'application/json'
+        }
+    }
+    let res = http.post(url, JSON.stringify(payload), params);
+    check(res, {
+        'is status code 201': (res) => res.status === 201
+    });
+    console.log(JSON.stringify(res, null, 2))
+};
