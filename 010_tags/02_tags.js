@@ -1,4 +1,5 @@
 import http from 'k6/http';
+import { group } from 'k6';
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
@@ -25,16 +26,21 @@ export function setup() {
 }
 
 export function noTags() {
-    http.get(BASE_URL + '/todos/1');
-    http.get(BASE_URL + '/todos/2');
-    http.get(BASE_URL + '/todos/3');
+    group('groupNameHere', function () {
+        http.get(BASE_URL + '/todos/1');
+        group('groupNameHere', function () {
+            http.get(BASE_URL + '/todos/2');
+            http.get(BASE_URL + '/todos/3');
+        });
+    });
+
 }
 
 export function withTags() {
     let requestName = BASE_URL + '/todos/{n}'
-    http.get(BASE_URL + '/todos/1', {tags: {name: requestName}}); //nadpisujemy tag systemowy
-    http.get(BASE_URL + '/todos/2', {tags: {name: requestName}});
-    http.get(BASE_URL + '/todos/3', {tags: {name: requestName}});
+    http.get(BASE_URL + '/todos/1', { tags: { name: requestName } }); //nadpisujemy tag systemowy
+    http.get(BASE_URL + '/todos/2', { tags: { name: requestName } });
+    http.get(BASE_URL + '/todos/3', { tags: { name: requestName } });
 }
 
 export function teardown() {
