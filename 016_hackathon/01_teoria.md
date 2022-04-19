@@ -8,8 +8,7 @@ Wykorzystaj wszystko czego się dowiedziałeś do przygotowania testu (użyj met
 2. Zorganizuj pojedyncze żądania w grupy (Page Views) 
 3. Dodaj checki wg własnego pomysłu
 4. Dodaj thresholdy, zaproponuj ich wartości i rodzaj
-
-5  Użyj scenariuszy, żeby mieć kilka konfiguracji:
+5. Użyj scenariuszy, żeby mieć kilka konfiguracji:
     - smokeTests
     - stressTests
     - soakTests
